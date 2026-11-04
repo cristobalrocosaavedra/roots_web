@@ -75,20 +75,26 @@ p { margin: 0 0 1em; }
 .nav.is-solid::before { opacity: 1; }
 .nav.is-solid { border-bottom-color: rgba(201, 165, 74, .25); }
 .nav__inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px var(--gutter); max-width: 1280px; margin: 0 auto; }
-.nav__brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.nav__brand { flex-shrink: 0; display: flex; align-items: center; gap: 12px; text-decoration: none; }
 .nav__brand img { width: 46px; height: 46px; border-radius: 50%; }
 .nav__brand span { font: 400 1.25rem/1 var(--f-serif); font-variation-settings: "SOFT" 50; }
-.nav__menu { display: flex; align-items: center; gap: 28px; }
+.nav__menu { display: flex; align-items: center; gap: 28px; margin-left: auto; }
+/* Selector de idioma (ES · EN · PT) */
+.idiomas { position: relative; z-index: 2; display: flex; gap: 2px; padding: 3px; border: 1px solid rgba(201, 165, 74, .4); border-radius: 999px; background: rgba(18, 16, 13, .35); }
+.idiomas button { min-width: 34px; height: 30px; padding: 0 8px; border: 0; border-radius: 999px; background: none; color: var(--text); font: 500 .74rem/1 var(--f-sans); letter-spacing: .06em; cursor: pointer; opacity: .75; transition: background .2s, color .2s, opacity .2s; }
+.idiomas button:hover { opacity: 1; color: var(--gold); }
+.idiomas button[aria-pressed="true"] { background: var(--gold); color: var(--night); opacity: 1; }
 .nav__menu a:not(.btn) { text-decoration: none; font-size: .92rem; color: var(--text); opacity: .85; transition: opacity .2s, color .2s; }
 .nav__menu a:not(.btn):hover { opacity: 1; color: var(--gold); }
 .nav__menu a { white-space: nowrap; }
-@media (min-width: 941px) and (max-width: 1180px) { .nav__menu { gap: 18px; } .nav__brand span { display: none; } }
-.nav__toggle { display: none; background: none; border: 0; padding: 10px 6px; cursor: pointer; }
+@media (min-width: 1101px) and (max-width: 1280px) { .nav__menu { gap: 18px; } .nav__brand span { display: none; } }
+.nav__toggle { order: 3; display: none; background: none; border: 0; padding: 10px 6px; cursor: pointer; }
 .nav__toggle span { display: block; width: 26px; height: 2px; background: var(--gold); margin: 6px 0; transition: transform .25s; }
 .nav__toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(4px) rotate(45deg); }
 .nav__toggle[aria-expanded="true"] span:nth-child(2) { transform: translateY(-4px) rotate(-45deg); }
-@media (max-width: 940px) {
+@media (max-width: 1100px) {
   .nav__toggle { display: block; position: relative; z-index: 2; }
+  .idiomas { margin-left: auto; }
   .nav__brand span { display: none; }
   .nav__menu {
     position: fixed; inset: 0; background: var(--night); flex-direction: column; justify-content: center; gap: 22px;
