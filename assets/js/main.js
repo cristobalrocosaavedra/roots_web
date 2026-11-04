@@ -43,7 +43,8 @@
 
   /* ---------- Mapa ---------- */
   const { lat, lng, googleMaps } = R.contacto.mapa;
-  $("#mapa").src = `https://maps.google.com/maps?q=${lat},${lng}+(Roots+Salinas)&z=16&hl=es&output=embed`;
+  // Se busca la ficha del local por nombre: con coordenadas + etiqueta, Google no pone el pin en Roots Salinas.
+  $("#mapa").src = `https://maps.google.com/maps?q=${encodeURIComponent("Roots Salinas, Pullally, Papudo")}&z=17&hl=es&output=embed`;
   $("#link-mapa").href = googleMaps;
   $("#link-waze").href = `https://waze.com/ul?ll=${lat},${lng}&navigate=yes`;
 
