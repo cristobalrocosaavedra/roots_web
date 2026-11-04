@@ -148,6 +148,48 @@
     }
   });
 
+  /* ---------- Galería emergente de clientes ---------- */
+  const fotosClientes = [
+    ["clientes-1.jpg", "Terraza llena: familias y amigos compartiendo bajo la malla de sombra"],
+    ["clientes-2.jpg", "Un día de temporada en la terraza de Roots Salinas"],
+    ["clientes-3.jpg", "Clientes disfrutando churrascos y jugos naturales"],
+    ["clientes-4.jpg", "Una familia que vuelve: ¡todos con el pulgar arriba!"],
+    ["clientes-5.jpg", "Almuerzo con vista al humedal de Pullally"],
+    ["clientes-6.jpg", "Familia, amigos y mascotas frente a la playa"],
+  ];
+  const galeria = $("#galeria");
+  if (galeria && typeof galeria.showModal === "function") {
+    const gImg = $("#galeria-img");
+    const gPie = $("#galeria-pie");
+    let actual = 0;
+    const mostrar = (i) => {
+      actual = (i + fotosClientes.length) % fotosClientes.length;
+      const [archivo, texto] = fotosClientes[actual];
+      gImg.src = "assets/img/fotos/" + archivo;
+      gImg.alt = texto;
+      gPie.textContent = `${texto} · ${actual + 1} de ${fotosClientes.length}`;
+    };
+    document.querySelectorAll("#atencion [data-foto]").forEach((b) =>
+      b.addEventListener("click", () => { mostrar(Number(b.dataset.foto)); galeria.showModal(); })
+    );
+    $(".galeria__cerrar").addEventListener("click", () => galeria.close());
+    $(".galeria__nav--prev").addEventListener("click", () => mostrar(actual - 1));
+    $(".galeria__nav--next").addEventListener("click", () => mostrar(actual + 1));
+    galeria.addEventListener("click", (e) => { if (e.target === galeria || e.target.classList.contains("galeria__fig")) galeria.close(); });
+    galeria.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") mostrar(actual - 1);
+      if (e.key === "ArrowRight") mostrar(actual + 1);
+    });
+    let x0 = null;
+    galeria.addEventListener("touchstart", (e) => (x0 = e.touches[0].clientX), { passive: true });
+    galeria.addEventListener("touchend", (e) => {
+      if (x0 === null) return;
+      const dx = e.changedTouches[0].clientX - x0;
+      if (Math.abs(dx) > 40) mostrar(actual + (dx < 0 ? 1 : -1));
+      x0 = null;
+    });
+  }
+
   /* ---------- Navegación ---------- */
   const nav = $("#nav");
   const onScroll = () => nav.classList.toggle("is-solid", window.scrollY > 60);
