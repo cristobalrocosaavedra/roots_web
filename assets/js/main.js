@@ -43,7 +43,8 @@
 
   /* ---------- Mapa ---------- */
   const { lat, lng, googleMaps } = R.contacto.mapa;
-  $("#mapa").src = `https://maps.google.com/maps?q=${lat},${lng}+(Roots+Salinas)&z=16&hl=es&output=embed`;
+  // Se busca la ficha del local por nombre: con coordenadas + etiqueta, Google no pone el pin en Roots Salinas.
+  $("#mapa").src = `https://maps.google.com/maps?q=${encodeURIComponent("Roots Salinas, Pullally, Papudo")}&z=17&hl=es&output=embed`;
   $("#link-mapa").href = googleMaps;
   $("#link-waze").href = `https://waze.com/ul?ll=${lat},${lng}&navigate=yes`;
 
@@ -96,6 +97,36 @@
       </article>`
     )
     .join("");
+  /* ---------- Carrusel de packs ---------- */
+  const track = $("#packs-grid");
+  const dotsBox = $("#packs-dots");
+  const cards = [...track.children];
+  const [btnPrev, btnNext] = document.querySelectorAll(".carrusel__btn");
+  const paso = () => cards[0].getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || 20);
+  const visibles = () => Math.max(1, Math.round(track.clientWidth / paso()));
+  const irA = (i) => track.scrollTo({ left: i * paso(), behavior: "smooth" });
+  const actualizar = () => {
+    const total = cards.length - visibles() + 1;
+    const i = Math.min(total - 1, Math.round(track.scrollLeft / paso()));
+    if (dotsBox.children.length !== total) {
+      dotsBox.innerHTML = Array.from({ length: total }, (_, n) => `<button type="button" aria-label="Ir al pack ${n + 1}"></button>`).join("");
+      [...dotsBox.children].forEach((d, n) => d.addEventListener("click", () => irA(n)));
+    }
+    [...dotsBox.children].forEach((d, n) => d.setAttribute("aria-current", n === i));
+    btnPrev.disabled = track.scrollLeft < 4;
+    btnNext.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
+    $(".carrusel__ctrl").hidden = total < 2;
+  };
+  btnPrev.addEventListener("click", () => track.scrollBy({ left: -paso(), behavior: "smooth" }));
+  btnNext.addEventListener("click", () => track.scrollBy({ left: paso(), behavior: "smooth" }));
+  track.addEventListener("scroll", () => requestAnimationFrame(actualizar), { passive: true });
+  track.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight") { e.preventDefault(); btnNext.click(); }
+    if (e.key === "ArrowLeft") { e.preventDefault(); btnPrev.click(); }
+  });
+  window.addEventListener("resize", actualizar);
+  actualizar();
+
   const selPack = $("#select-pack");
   R.packs.forEach((p) => selPack.insertAdjacentHTML("beforeend", `<option value="${p.id}">${esc(p.nombre)}</option>`));
   document.addEventListener("click", (e) => {

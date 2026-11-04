@@ -82,7 +82,7 @@
   <main id="contenido">
     <!-- HERO -->
     <section class="hero hero--split" id="inicio">
-      <img class="hero__img hero__img--familia" src="assets/img/fotos/familia-roots.jpg" alt="La familia Roots Salinas frente al local, bajo el letrero de Roots Salinas, Churros Popcorn y Granizados" width="1448" height="1086">
+      <img class="hero__img hero__img--familia" src="assets/img/fotos/familia-roots.jpg" alt="La familia Roots Salinas frente al local, bajo los letreros de Roots Salinas, Churros Popcorn y Granizados, con el cartel ilustrado de Salinas de Pullally, Papudo" width="1600" height="1200">
       <div class="hero__shade" aria-hidden="true"></div>
       <div class="hero__content">
         <p class="hero__place">Playa Las Salinas de Pullally, Papudo</p>
@@ -226,7 +226,21 @@
           <h2 class="title">Packs para grupos</h2>
           <p class="lead">¿Organizas el paseo de curso, la salida del club de adulto mayor, el centro de madres o el tercer tiempo del equipo? Elige un pack, cuéntanos cuántos vienen y te mandamos una propuesta.</p>
         </div>
-        <div class="packs" id="packs-grid"></div>
+        <div class="eligieron">
+          <p class="eligieron__texto">Distintos grupos de adultos, surfistas y motoqueros ya nos han elegido.</p>
+          <div class="eligieron__fotos">
+            <figure><img src="assets/img/fotos/grupo-adultos.jpg" alt="Grupo de adultos mayores sonriendo con churros, café y jugos en la terraza" loading="lazy" width="1400" height="788"><figcaption>Adultos</figcaption></figure>
+            <figure><img src="assets/img/fotos/grupo-surfistas.jpg" alt="Grupo de surfistas con traje de agua comiendo churros después de surfear" loading="lazy" width="1400" height="788"><figcaption>Surfistas</figcaption></figure>
+          </div>
+        </div>
+        <div class="carrusel" aria-roledescription="carrusel" aria-label="Packs para grupos">
+          <div class="packs" id="packs-grid" tabindex="0"></div>
+          <div class="carrusel__ctrl">
+            <button type="button" class="carrusel__btn" data-dir="-1" aria-label="Pack anterior">‹</button>
+            <div class="carrusel__dots" id="packs-dots"></div>
+            <button type="button" class="carrusel__btn" data-dir="1" aria-label="Pack siguiente">›</button>
+          </div>
+        </div>
         <p class="packs__note">Todos los packs se ajustan a tu presupuesto y a necesidades especiales, como opciones vegetarianas o sin gluten.</p>
       </div>
     </section>
@@ -243,6 +257,10 @@
             <li>Te respondemos con la propuesta.</li>
           </ol>
           <button type="button" class="btn btn--ghost btn--sm" id="compartir">Compartir con mi grupo</button>
+          <figure class="reserva__foto">
+            <img src="assets/img/fotos/grupo-motoqueros.jpg" alt="Grupo de motoqueros con chaquetas y casco compartiendo en la terraza" loading="lazy" width="1400" height="788">
+            <figcaption>Motoqueros que pararon a compartir en Roots Salinas.</figcaption>
+          </figure>
         </div>
         <form class="form" id="form-reserva" novalidate>
           <label class="form__full">Organizador o institución
