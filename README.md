@@ -91,8 +91,9 @@ Cada sección es un bloque `<section>` en `index.html`, marcado con un comentari
 ## 2. Mapa de tecnología
 
 ```mermaid
-flowchart LR
+flowchart TD
     subgraph REPO["📁 Este repositorio (GitHub)"]
+        direction LR
         HTML["index.html<br/><i>HTML: contenido</i>"]
         CSS["styles.css<br/><i>CSS: diseño</i>"]
         CFG["config.js<br/><i>JavaScript: datos</i>"]
