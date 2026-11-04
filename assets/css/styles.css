@@ -79,11 +79,17 @@ p { margin: 0 0 1em; }
 .nav__brand img { width: 46px; height: 46px; border-radius: 50%; }
 .nav__brand span { font: 400 1.25rem/1 var(--f-serif); font-variation-settings: "SOFT" 50; }
 .nav__menu { display: flex; align-items: center; gap: 28px; margin-left: auto; }
-/* Selector de idioma (ES · EN · PT) */
-.idiomas { position: relative; z-index: 2; display: flex; gap: 2px; padding: 3px; border: 1px solid rgba(201, 165, 74, .4); border-radius: 999px; background: rgba(18, 16, 13, .35); }
-.idiomas button { min-width: 34px; height: 30px; padding: 0 8px; border: 0; border-radius: 999px; background: none; color: var(--text); font: 500 .74rem/1 var(--f-sans); letter-spacing: .06em; cursor: pointer; opacity: .75; transition: background .2s, color .2s, opacity .2s; }
-.idiomas button:hover { opacity: 1; color: var(--gold); }
-.idiomas button[aria-pressed="true"] { background: var(--gold); color: var(--night); opacity: 1; }
+/* Selector de idioma: botón con el idioma actual y lista desplegable */
+.idiomas { position: relative; z-index: 2; }
+.idiomas__btn { display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 12px; border: 1px solid rgba(201, 165, 74, .45); border-radius: 999px; background: rgba(18, 16, 13, .45); color: var(--text); font: 500 .8rem/1 var(--f-sans); letter-spacing: .04em; cursor: pointer; transition: border-color .2s, color .2s; }
+.idiomas__btn:hover, .idiomas__btn[aria-expanded="true"] { border-color: var(--gold); color: var(--gold); }
+.idiomas__flecha { transition: transform .2s; }
+.idiomas__btn[aria-expanded="true"] .idiomas__flecha { transform: rotate(180deg); }
+.idiomas__lista { position: absolute; top: calc(100% + 8px); right: 0; min-width: 180px; margin: 0; padding: 6px; list-style: none; background: var(--night-2); border: 1px solid rgba(201, 165, 74, .45); border-radius: 12px; box-shadow: 0 12px 32px rgba(0, 0, 0, .45); }
+.idiomas__lista button { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; padding: 9px 12px; border: 0; border-radius: 8px; background: none; color: var(--text); font: 400 .92rem/1.2 var(--f-sans); text-align: left; cursor: pointer; }
+.idiomas__lista button small { color: var(--muted); font-size: .72rem; letter-spacing: .06em; }
+.idiomas__lista button:hover, .idiomas__lista button:focus-visible { background: rgba(255, 222, 89, .1); color: var(--gold); }
+.idiomas__lista button[aria-current="true"] { color: var(--gold); font-weight: 500; }
 .nav__menu a:not(.btn) { text-decoration: none; font-size: .92rem; color: var(--text); opacity: .85; transition: opacity .2s, color .2s; }
 .nav__menu a:not(.btn):hover { opacity: 1; color: var(--gold); }
 .nav__menu a { white-space: nowrap; }
@@ -405,3 +411,13 @@ p { margin: 0 0 1em; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   html { scroll-behavior: auto; }
 }
+
+/* ---------- Chino: tipografías con caracteres chinos y sin cursivas ---------- */
+html[lang^="zh"] {
+  --f-serif: "Fraunces", "Noto Serif SC", "Source Han Serif SC", "Songti SC", "SimSun", serif;
+  --f-sans: "Poppins", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", "Hiragino Sans GB", sans-serif;
+}
+html[lang^="zh"] body { line-height: 1.75; }
+html[lang^="zh"] em, html[lang^="zh"] i, html[lang^="zh"] .hero__sub, html[lang^="zh"] .carta__slogan,
+html[lang^="zh"] .eligieron__texto, html[lang^="zh"] .intro__firma span, html[lang^="zh"] .footer__thanks,
+html[lang^="zh"] .pack__price, html[lang^="zh"] .carta__fav, html[lang^="zh"] .platos figcaption { font-style: normal; }

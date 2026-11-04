@@ -10,7 +10,8 @@
      El español es el texto original de index.html y config.js; las traducciones
      viven en assets/js/i18n.js. Orden para elegir idioma: ?lang= en la URL,
      la elección guardada del visitante, el idioma del navegador y, si no, español. */
-  const IDIOMAS = Object.keys(I18N.idiomas);
+  // Solo se ofrecen los idiomas cuyo archivo de traducción está cargado (el español siempre).
+  const IDIOMAS = Object.keys(I18N.idiomas).filter((l) => l === "es" || I18N[l]);
   const guardado = () => { try { return localStorage.getItem("roots-idioma"); } catch (_) { return null; } };
   const guardar = (l) => { try { localStorage.setItem("roots-idioma", l); } catch (_) {} };
   const delNavegador = () => (navigator.languages || [navigator.language || ""]).map((l) => l.slice(0, 2).toLowerCase()).find((l) => IDIOMAS.includes(l));
@@ -55,8 +56,9 @@
     document.documentElement.lang = lang === "es" ? "es-CL" : I18N.idiomas[lang].locale;
     document.title = t("meta.title");
     if (metaDesc) metaDesc.content = t("meta.desc");
-    $("#idiomas").setAttribute("aria-label", t("idioma.aria"));
-    document.querySelectorAll("#idiomas [data-lang]").forEach((b) => b.setAttribute("aria-pressed", b.dataset.lang === lang));
+    $("#idiomas-actual").textContent = I18N.idiomas[lang].corto;
+    $("#idiomas-btn").setAttribute("aria-label", `${t("idioma.aria")}: ${I18N.idiomas[lang].nombre}`);
+    document.querySelectorAll("#idiomas-lista [data-lang]").forEach((b) => b.setAttribute("aria-current", b.dataset.lang === lang));
   };
 
   /* ---------- Contacto y redes ---------- */
@@ -99,7 +101,7 @@
   const { lat, lng, googleMaps } = R.contacto.mapa;
   const pintarMapa = () => {
     // Se busca la ficha del local por nombre: con coordenadas + etiqueta, Google no pone el pin en Roots Salinas.
-    $("#mapa").src = `https://maps.google.com/maps?q=${encodeURIComponent("Roots Salinas, Pullally, Papudo")}&z=17&hl=${lang}&output=embed`;
+    $("#mapa").src = `https://maps.google.com/maps?q=${encodeURIComponent("Roots Salinas, Pullally, Papudo")}&z=17&hl=${I18N.idiomas[lang].mapa || lang}&output=embed`;
   };
   $("#link-mapa").href = googleMaps;
   $("#link-waze").href = `https://waze.com/ul?ll=${lat},${lng}&navigate=yes`;
@@ -369,8 +371,33 @@
     etiquetarFotos();
     toggle.setAttribute("aria-label", toggle.getAttribute("aria-expanded") === "true" ? t("nav.cerrar") : t("nav.abrir"));
   };
-  document.querySelectorAll("#idiomas [data-lang]").forEach((b) =>
-    b.addEventListener("click", () => { if (b.dataset.lang !== lang) aplicarIdioma(b.dataset.lang, true); })
-  );
+  /* ---------- Selector de idioma (menú desplegable) ---------- */
+  const btnIdioma = $("#idiomas-btn");
+  const listaIdiomas = $("#idiomas-lista");
+  listaIdiomas.innerHTML = IDIOMAS.map((l) => {
+    const d = I18N.idiomas[l];
+    return `<li><button type="button" data-lang="${l}" lang="${d.locale}">${esc(d.nombre)} <small>${esc(d.corto)}</small></button></li>`;
+  }).join("");
+  const abrirIdiomas = (abrir) => {
+    btnIdioma.setAttribute("aria-expanded", abrir);
+    listaIdiomas.hidden = !abrir;
+    if (abrir) (listaIdiomas.querySelector('[aria-current="true"]') || listaIdiomas.querySelector("button")).focus();
+  };
+  btnIdioma.addEventListener("click", () => abrirIdiomas(listaIdiomas.hidden));
+  listaIdiomas.addEventListener("click", (e) => {
+    const b = e.target.closest("[data-lang]");
+    if (!b) return;
+    abrirIdiomas(false);
+    btnIdioma.focus();
+    if (b.dataset.lang !== lang) aplicarIdioma(b.dataset.lang, true);
+  });
+  listaIdiomas.addEventListener("keydown", (e) => {
+    const botones = [...listaIdiomas.querySelectorAll("button")];
+    const i = botones.indexOf(document.activeElement);
+    if (e.key === "ArrowDown") { e.preventDefault(); botones[(i + 1) % botones.length].focus(); }
+    if (e.key === "ArrowUp") { e.preventDefault(); botones[(i - 1 + botones.length) % botones.length].focus(); }
+  });
+  document.addEventListener("click", (e) => { if (!listaIdiomas.hidden && !e.target.closest("#idiomas")) abrirIdiomas(false); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !listaIdiomas.hidden) { abrirIdiomas(false); btnIdioma.focus(); } });
   aplicarIdioma(lang, Boolean(deUrl));
 })();

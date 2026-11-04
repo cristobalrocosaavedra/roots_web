@@ -31,7 +31,10 @@ roots_web/
 │   ├── js/
 │   │   ├── config.js         ← LOS DATOS. WhatsApp, horarios, carta, packs, preguntas.
 │   │   │                        (Es el archivo que más se edita.)
-│   │   ├── i18n.js           ← LAS TRADUCCIONES. Inglés y portugués de toda la página.
+│   │   ├── i18n.js           ← LOS IDIOMAS. Lista de idiomas del menú y textos base en español.
+│   │   ├── idiomas/          ← LAS TRADUCCIONES. Un archivo por idioma:
+│   │   │                        en, pt, it, fr, de, zh (inglés, portugués, italiano,
+│   │   │                        francés, alemán y chino).
 │   │   └── main.js           ← EL FUNCIONAMIENTO. Arma la carta y los packs, el carrusel,
 │   │                            la galería, el mapa, el menú, los idiomas y el envío a WhatsApp.
 │   └── img/
@@ -192,13 +195,17 @@ que necesites y abajo pulsa **Commit changes**.
 | Datos del registro Sernatur | `index.html` | `class="sernatur"` |
 | Una foto | `assets/img/fotos/` | subir la nueva **con el mismo nombre** |
 | Fotos de la galería de clientes | `assets/js/main.js` | `fotosClientes` (los textos están en `i18n.js` → `cliente.1` … `cliente.6`) |
-| Un texto en inglés o portugués | `assets/js/i18n.js` | la clave del texto (`data-i18n="…"` en `index.html`) o, para la carta y los packs, el texto en español |
+| Un texto en otro idioma | `assets/js/idiomas/<idioma>.js` (ej. `fr.js`) | la clave del texto (`data-i18n="…"` en `index.html`) o, para la carta y los packs, el texto en español |
 | Colores o tipografías | `assets/css/styles.css` | `:root { --gold: …; --night: … }` al inicio |
 
-🌐 **Idiomas:** la página está en español, inglés y portugués (botones ES · EN · PT arriba). El
-español es el texto original de `index.html` y `config.js`; el inglés y el portugués están en
-`assets/js/i18n.js`. Si cambias un texto en español, actualiza también su traducción: si falta, ese
-texto aparece en español. Se puede compartir un idioma con `?lang=en` o `?lang=pt` al final del enlace.
+🌐 **Idiomas:** la página está en 7 idiomas: español, inglés, portugués, italiano, francés, alemán y
+chino (menú desplegable 🌐 arriba a la derecha). El español es el texto original de `index.html` y
+`config.js`; cada traducción está en `assets/js/idiomas/` (un archivo por idioma). Si cambias un
+texto en español, actualiza también sus traducciones: si falta alguna, ese texto aparece en español.
+Se puede compartir un idioma con `?lang=en`, `?lang=fr`, `?lang=zh`, etc. al final del enlace.
+
+**Agregar otro idioma:** copia `assets/js/idiomas/en.js` con el código nuevo (ej. `ja.js`), traduce
+sus textos, agrégalo a la lista `idiomas` de `assets/js/i18n.js` y suma su `<script>` en `index.html`.
 
 ⚠️ **Cuidado al editar `config.js`:** respeta las comillas `"…"` y las comas `,` al final de cada
 línea. Si falta una, la carta y los packs dejan de aparecer. Si pasa, revisa el último cambio o
