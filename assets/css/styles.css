@@ -206,11 +206,18 @@ p { margin: 0 0 1em; }
   .platos { grid-template-columns: repeat(3, 72%); overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; margin-right: calc(var(--gutter) * -1); }
   .platos figure { scroll-snap-align: start; }
 }
-.carta { columns: 3 280px; column-gap: 56px; }
-.carta__cat { break-inside: avoid; margin-bottom: 44px; }
-.carta__cat h3 { display: flex; align-items: center; gap: 14px; font: 400 1.45rem/1.2 var(--f-serif); color: var(--gold); margin-bottom: 10px; }
-.carta__cat h3::after { content: ""; flex: 1; height: 1px; background: rgba(201, 165, 74, .4); }
-.carta__cat ul { list-style: none; margin: 0; padding: 0; }
+/* Carta en títulos desplegables: cada categoría se abre según lo que quieran comer */
+.carta { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 24px; align-items: start; max-width: 980px; margin: 0 auto; }
+@media (max-width: 760px) { .carta { grid-template-columns: 1fr; } }
+.carta__cat { border: 1px solid rgba(201, 165, 74, .3); border-radius: var(--radius); background: var(--night-2); transition: border-color .2s; }
+.carta__cat[open], .carta__cat:hover { border-color: rgba(255, 222, 89, .6); }
+.carta__cat summary { display: flex; align-items: center; gap: 12px; padding: 16px 20px; cursor: pointer; list-style: none; }
+.carta__cat summary::-webkit-details-marker { display: none; }
+.carta__cat summary::after { content: "+"; margin-left: 4px; font: 300 1.6rem/1 var(--f-serif); color: var(--gold); transition: transform .2s; }
+.carta__cat[open] summary::after { transform: rotate(45deg); }
+.carta__cat h3 { flex: 1; font: 400 1.3rem/1.2 var(--f-serif); color: var(--gold); margin: 0; }
+.carta__count { color: var(--muted); font-size: .82rem; white-space: nowrap; }
+.carta__cat ul { list-style: none; margin: 0; padding: 4px 20px 12px; border-top: 1px solid rgba(201, 165, 74, .2); }
 .carta__cat li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 12px; padding: 9px 0; }
 .carta__name { flex: 1; font-weight: 500; }
 .carta__cat small { flex-basis: 100%; color: var(--muted); font-size: .86rem; line-height: 1.4; }

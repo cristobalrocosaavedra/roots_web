@@ -55,8 +55,11 @@
   /* ---------- Carta ---------- */
   $("#carta-grid").innerHTML = R.carta
     .map(
-      (cat) => `<section class="carta__cat">
-        <h3>${esc(cat.titulo)}</h3>
+      (cat) => `<details class="carta__cat">
+        <summary>
+          <h3>${esc(cat.titulo)}</h3>
+          <span class="carta__count">${cat.items.length} ${cat.items.length === 1 ? "opción" : "opciones"}</span>
+        </summary>
         <ul>${cat.items
           .map(
             (it) => `<li>
@@ -66,7 +69,7 @@
             </li>`
           )
           .join("")}</ul>
-      </section>`
+      </details>`
     )
     .join("");
   if (!R.mostrarPrecios) $(".carta__download").remove();
