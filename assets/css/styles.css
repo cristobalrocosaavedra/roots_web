@@ -68,8 +68,12 @@ p { margin: 0 0 1em; }
 .btn--block { width: 100%; }
 
 /* ---------- Navegación ---------- */
-.nav { position: fixed; inset: 0 0 auto; z-index: 50; transition: background .3s, border-color .3s; border-bottom: 1px solid transparent; }
-.nav.is-solid { background: rgba(18, 16, 13, .94); backdrop-filter: blur(10px); border-bottom-color: rgba(201, 165, 74, .25); }
+.nav { position: fixed; inset: 0 0 auto; z-index: 50; transition: border-color .3s; border-bottom: 1px solid transparent; }
+/* El fondo con desenfoque va en una capa aparte (::before). Si backdrop-filter estuviera en .nav,
+   el menú del celular (position: fixed) quedaría encerrado en la barra al escrolear. */
+.nav::before { content: ""; position: absolute; inset: 0; z-index: -1; background: rgba(18, 16, 13, .94); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); opacity: 0; transition: opacity .3s; pointer-events: none; }
+.nav.is-solid::before { opacity: 1; }
+.nav.is-solid { border-bottom-color: rgba(201, 165, 74, .25); }
 .nav__inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px var(--gutter); max-width: 1280px; margin: 0 auto; }
 .nav__brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
 .nav__brand img { width: 46px; height: 46px; border-radius: 50%; }
@@ -196,17 +200,33 @@ p { margin: 0 0 1em; }
 .carta__head .lead { margin-inline: auto; }
 .platos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 64px; }
 .platos figure { margin: 0; position: relative; border-radius: var(--radius); overflow: hidden; aspect-ratio: 4 / 5; }
-.platos img { width: 100%; height: 100%; object-fit: cover; }
+.platos img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s ease; }
+.platos figure:hover img { transform: scale(1.04); }
 .platos figcaption { position: absolute; left: 16px; bottom: 14px; font: italic 400 1.15rem/1 var(--f-serif); color: var(--text); text-shadow: 0 2px 12px rgba(0, 0, 0, .7); }
 @media (max-width: 760px) {
   .platos { grid-template-columns: repeat(3, 72%); overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; margin-right: calc(var(--gutter) * -1); }
   .platos figure { scroll-snap-align: start; }
 }
+/* Carta: abierta en computador (3 columnas); en celular, títulos desplegables */
 .carta { columns: 3 280px; column-gap: 56px; }
 .carta__cat { break-inside: avoid; margin-bottom: 44px; }
-.carta__cat h3 { display: flex; align-items: center; gap: 14px; font: 400 1.45rem/1.2 var(--f-serif); color: var(--gold); margin-bottom: 10px; }
-.carta__cat h3::after { content: ""; flex: 1; height: 1px; background: rgba(201, 165, 74, .4); }
+.carta__cat summary { display: flex; align-items: center; gap: 14px; margin-bottom: 10px; list-style: none; pointer-events: none; }
+.carta__cat summary::-webkit-details-marker { display: none; }
+.carta__cat summary::after { content: ""; flex: 1; order: 1; height: 1px; background: rgba(201, 165, 74, .4); }
+.carta__cat h3 { font: 400 1.45rem/1.2 var(--f-serif); color: var(--gold); margin: 0; }
+.carta__count { display: none; }
 .carta__cat ul { list-style: none; margin: 0; padding: 0; }
+@media (max-width: 760px) {
+  .carta { columns: auto; display: grid; gap: 12px; }
+  .carta__cat { margin: 0; border: 1px solid rgba(201, 165, 74, .3); border-radius: var(--radius); background: var(--night-2); }
+  .carta__cat[open] { border-color: rgba(255, 222, 89, .6); }
+  .carta__cat summary { margin: 0; padding: 16px 20px; gap: 12px; cursor: pointer; pointer-events: auto; }
+  .carta__cat summary::after { content: "+"; flex: none; height: auto; background: none; font: 300 1.6rem/1 var(--f-serif); color: var(--gold); transition: transform .2s; }
+  .carta__cat[open] summary::after { transform: rotate(45deg); }
+  .carta__cat h3 { flex: 1; font-size: 1.3rem; }
+  .carta__count { display: inline; color: var(--muted); font-size: .82rem; white-space: nowrap; }
+  .carta__cat ul { padding: 4px 20px 12px; border-top: 1px solid rgba(201, 165, 74, .2); }
+}
 .carta__cat li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 12px; padding: 9px 0; }
 .carta__name { flex: 1; font-weight: 500; }
 .carta__cat small { flex-basis: 100%; color: var(--muted); font-size: .86rem; line-height: 1.4; }
@@ -232,6 +252,11 @@ p { margin: 0 0 1em; }
 .sernatur p { margin: 0; color: var(--muted); font-size: .95rem; }
 @media (max-width: 520px) { .sernatur { flex-direction: column; align-items: flex-start; } }
 
+/* Fotos que se abren en la galería emergente: mismo zoom leve que avisa que se pueden tocar */
+[data-galeria] img { cursor: zoom-in; transition: transform .6s ease; }
+[data-galeria] .foto-abrible:hover img { transform: scale(1.04); }
+.foto-abrible:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
 /* Galería emergente */
 .galeria { width: min(1100px, 100vw); max-width: 100vw; max-height: 100svh; padding: 0; border: 0; background: transparent; color: var(--text); overflow: visible; }
 .galeria::backdrop { background: rgba(10, 9, 7, .9); }
@@ -243,6 +268,7 @@ p { margin: 0 0 1em; }
 .galeria__nav { top: 50%; transform: translateY(-50%); }
 .galeria__nav--prev { left: 4px; }
 .galeria__nav--next { right: 4px; }
+.galeria__nav[hidden] { display: none; }
 .galeria__cerrar:hover, .galeria__nav:hover { background: var(--gold); color: var(--night); }
 @media (max-width: 600px) { .galeria__fig { padding: 56px 8px 16px; } .galeria__nav { top: auto; bottom: -44px; transform: none; } .galeria__nav--prev { left: calc(50% - 56px); } .galeria__nav--next { right: calc(50% - 56px); } }
 
@@ -288,7 +314,8 @@ p { margin: 0 0 1em; }
 @media (max-width: 880px) { .reserva { grid-template-columns: 1fr; } }
 .pasos { list-style: none; counter-reset: paso; padding: 0; margin: 1.8em 0 2em; }
 .pasos li { counter-increment: paso; display: flex; align-items: baseline; gap: 16px; padding: 10px 0; }
-.reserva__foto { margin: 28px 0 0; border-radius: var(--radius); overflow: hidden; }
+.reserva__foto { margin: 28px 0 0; }
+.reserva__img { border-radius: var(--radius); overflow: hidden; }
 .reserva__foto img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
 .reserva__foto figcaption { padding: 10px 2px 0; color: var(--muted); font-size: .88rem; }
 .pasos li::before { content: counter(paso); font: 400 1.6rem/1 var(--f-serif); color: var(--gold); width: 1.2em; }

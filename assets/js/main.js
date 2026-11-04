@@ -55,8 +55,11 @@
   /* ---------- Carta ---------- */
   $("#carta-grid").innerHTML = R.carta
     .map(
-      (cat) => `<section class="carta__cat">
-        <h3>${esc(cat.titulo)}</h3>
+      (cat) => `<details class="carta__cat">
+        <summary>
+          <h3>${esc(cat.titulo)}</h3>
+          <span class="carta__count">${cat.items.length} ${cat.items.length === 1 ? "opción" : "opciones"}</span>
+        </summary>
         <ul>${cat.items
           .map(
             (it) => `<li>
@@ -66,10 +69,21 @@
             </li>`
           )
           .join("")}</ul>
-      </section>`
+      </details>`
     )
     .join("");
   if (!R.mostrarPrecios) $(".carta__download").remove();
+
+  // Carta: en computador todas las categorías abiertas; en celular cerradas, como lista desplegable.
+  const esCelular = window.matchMedia("(max-width: 760px)");
+  const categorias = document.querySelectorAll(".carta__cat");
+  const ajustarCarta = () => categorias.forEach((d) => {
+    d.open = !esCelular.matches;
+    d.querySelector("summary").tabIndex = esCelular.matches ? 0 : -1;
+  });
+  ajustarCarta();
+  esCelular.addEventListener("change", ajustarCarta);
+  categorias.forEach((d) => d.addEventListener("toggle", () => { if (!esCelular.matches && !d.open) d.open = true; }));
 
   /* ---------- Packs ---------- */
   const ICONOS = {
@@ -179,7 +193,10 @@
     }
   });
 
-  /* ---------- Galería emergente de clientes ---------- */
+  /* ---------- Galería emergente ----------
+     Se abren en grande las fotos con personas: clientes (#atencion) y los grupos de fotos
+     marcados con data-galeria en index.html (Nuestras raíces, grupos, motoqueros).
+     Las fotos de El lugar y de la Carta solo hacen zoom leve y no se abren. */
   const fotosClientes = [
     ["clientes-1.jpg", "Terraza llena: familias y amigos compartiendo bajo la malla de sombra"],
     ["clientes-2.jpg", "Un día de temporada en la terraza de Roots Salinas"],
@@ -187,22 +204,50 @@
     ["clientes-4.jpg", "Una familia que vuelve: ¡todos con el pulgar arriba!"],
     ["clientes-5.jpg", "Almuerzo con vista al humedal de Pullally"],
     ["clientes-6.jpg", "Familia, amigos y mascotas frente a la playa"],
-  ];
+  ].map(([archivo, texto]) => ({ src: "assets/img/fotos/" + archivo, alt: texto }));
   const galeria = $("#galeria");
   if (galeria && typeof galeria.showModal === "function") {
     const gImg = $("#galeria-img");
     const gPie = $("#galeria-pie");
+    const navs = galeria.querySelectorAll(".galeria__nav");
+    let lista = fotosClientes;
     let actual = 0;
     const mostrar = (i) => {
-      actual = (i + fotosClientes.length) % fotosClientes.length;
-      const [archivo, texto] = fotosClientes[actual];
-      gImg.src = "assets/img/fotos/" + archivo;
-      gImg.alt = texto;
-      gPie.textContent = `${texto} · ${actual + 1} de ${fotosClientes.length}`;
+      actual = (i + lista.length) % lista.length;
+      const { src, alt } = lista[actual];
+      gImg.src = src;
+      gImg.alt = alt;
+      gPie.textContent = lista.length > 1 ? `${alt} · ${actual + 1} de ${lista.length}` : alt;
     };
+    const abrir = (fotos, i) => {
+      lista = fotos;
+      navs.forEach((n) => (n.hidden = fotos.length < 2));
+      mostrar(i);
+      galeria.showModal();
+    };
+
+    // Fotos de clientes (botones con data-foto)
     document.querySelectorAll("#atencion [data-foto]").forEach((b) =>
-      b.addEventListener("click", () => { mostrar(Number(b.dataset.foto)); galeria.showModal(); })
+      b.addEventListener("click", () => abrir(fotosClientes, Number(b.dataset.foto)))
     );
+
+    // Grupos de fotos con data-galeria: cada foto se puede tocar o abrir con Enter
+    document.querySelectorAll("[data-galeria]").forEach((grupo) => {
+      const imgs = [...grupo.querySelectorAll("img")];
+      const fotos = imgs.map((img) => ({ src: img.getAttribute("src"), alt: img.alt }));
+      imgs.forEach((img, i) => {
+        const caja = img.parentElement;
+        caja.classList.add("foto-abrible");
+        caja.tabIndex = 0;
+        caja.setAttribute("role", "button");
+        caja.setAttribute("aria-label", "Ampliar foto: " + img.alt);
+        caja.addEventListener("click", () => abrir(fotos, i));
+        caja.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") { e.preventDefault(); abrir(fotos, i); }
+        });
+      });
+    });
+
     $(".galeria__cerrar").addEventListener("click", () => galeria.close());
     $(".galeria__nav--prev").addEventListener("click", () => mostrar(actual - 1));
     $(".galeria__nav--next").addEventListener("click", () => mostrar(actual + 1));
@@ -214,7 +259,7 @@
     let x0 = null;
     galeria.addEventListener("touchstart", (e) => (x0 = e.touches[0].clientX), { passive: true });
     galeria.addEventListener("touchend", (e) => {
-      if (x0 === null) return;
+      if (x0 === null || lista.length < 2) return;
       const dx = e.changedTouches[0].clientX - x0;
       if (Math.abs(dx) > 40) mostrar(actual + (dx < 0 ? 1 : -1));
       x0 = null;
