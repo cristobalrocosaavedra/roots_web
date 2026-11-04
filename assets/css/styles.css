@@ -68,8 +68,12 @@ p { margin: 0 0 1em; }
 .btn--block { width: 100%; }
 
 /* ---------- Navegación ---------- */
-.nav { position: fixed; inset: 0 0 auto; z-index: 50; transition: background .3s, border-color .3s; border-bottom: 1px solid transparent; }
-.nav.is-solid { background: rgba(18, 16, 13, .94); backdrop-filter: blur(10px); border-bottom-color: rgba(201, 165, 74, .25); }
+.nav { position: fixed; inset: 0 0 auto; z-index: 50; transition: border-color .3s; border-bottom: 1px solid transparent; }
+/* El fondo con desenfoque va en una capa aparte (::before). Si backdrop-filter estuviera en .nav,
+   el menú del celular (position: fixed) quedaría encerrado en la barra al escrolear. */
+.nav::before { content: ""; position: absolute; inset: 0; z-index: -1; background: rgba(18, 16, 13, .94); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); opacity: 0; transition: opacity .3s; pointer-events: none; }
+.nav.is-solid::before { opacity: 1; }
+.nav.is-solid { border-bottom-color: rgba(201, 165, 74, .25); }
 .nav__inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px var(--gutter); max-width: 1280px; margin: 0 auto; }
 .nav__brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
 .nav__brand img { width: 46px; height: 46px; border-radius: 50%; }
