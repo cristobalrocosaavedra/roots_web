@@ -3,7 +3,8 @@
 Landing page de **Roots Salinas**, local gastronómico familiar en Playa Las Salinas de Pullally,
 comuna de Papudo. *Sabores con raíces, experiencias junto al mar.*
 
-🌐 **Sitio publicado:** https://openweb-cl.github.io/roots_web/
+🌐 **Sitio publicado:** https://rootssalinas.cl
+(la dirección antigua, https://openweb-cl.github.io/roots_web/, redirige sola al dominio).
 
 > **En una frase:** es una sola página web hecha con **HTML, CSS y JavaScript puros** (sin
 > frameworks ni instalaciones), guardada en este repositorio y publicada gratis con **GitHub Pages**.
