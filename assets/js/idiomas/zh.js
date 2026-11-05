@@ -149,7 +149,7 @@ window.ROOTS_I18N.zh = {
     "footer.cotizar": "团体报价",
     "footer.llegar": "交通指南",
     "footer.creditos": "家庭、团队、店铺、顾客和 churrasco salinero 的照片：Roots Salinas。其余为 AI 生成的示意图片，但《Ola en Papudo》除外，作者 <a href=\"https://commons.wikimedia.org/wiki/File:Laya_de_Papudo,_Oceano.jpg\" target=\"_blank\" rel=\"noopener\">Trinicorrea1</a>（<a href=\"https://creativecommons.org/licenses/by-sa/3.0/deed.zh-hans\" target=\"_blank\" rel=\"noopener\">CC BY-SA 3.0</a>），来自 Wikimedia Commons。",
-    "footer.dev": "网站由 <a href=\"https://www.instagram.com/matichoc.pasion.por.el.cacao/\" target=\"_blank\" rel=\"noopener\">@matichoc.pasion.por.el.cacao</a> 开发 · 想为您的生意做一个这样的网站？<a href=\"https://ig.me/m/matichoc.pasion.por.el.cacao\" target=\"_blank\" rel=\"noopener\">欢迎询价</a>",
+    "footer.dev": "网站由 <a href=\"https://www.instagram.com/matichoc.pasion.por.el.cacao/\" target=\"_blank\" rel=\"noopener\">@matichoc.pasion.por.el.cacao</a> 开发 · 想为您的生意做一个这样的网站？<a href=\"https://wa.me/56942586908?text=%E6%82%A8%E5%A5%BD%EF%BC%81%E6%88%91%E7%9C%8B%E5%88%B0%E4%BA%86%20Roots%20Salinas%20%E7%9A%84%E7%BD%91%E7%AB%99%EF%BC%8C%E6%83%B3%E4%B8%BA%E6%88%91%E7%9A%84%E7%94%9F%E6%84%8F%E5%81%9A%E4%B8%80%E4%B8%AA%E8%BF%99%E6%A0%B7%E7%9A%84%E7%BD%91%E7%AB%99%EF%BC%8C%E8%AF%B7%E6%8A%A5%E4%BB%B7%E3%80%82\" target=\"_blank\" rel=\"noopener\">欢迎询价</a>",
     "fab": "联系我们",
 
     "carta.opcion": "种",

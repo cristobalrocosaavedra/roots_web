@@ -149,7 +149,7 @@ window.ROOTS_I18N.it = {
     "footer.cotizar": "Preventivo per gruppi",
     "footer.llegar": "Come arrivare",
     "footer.creditos": "Foto della famiglia, dello staff, del locale, dei clienti e del churrasco salinero: Roots Salinas. Le altre sono immagini illustrative generate con l’IA, tranne «Ola en Papudo» di <a href=\"https://commons.wikimedia.org/wiki/File:Laya_de_Papudo,_Oceano.jpg\" target=\"_blank\" rel=\"noopener\">Trinicorrea1</a> (<a href=\"https://creativecommons.org/licenses/by-sa/3.0/deed.it\" target=\"_blank\" rel=\"noopener\">CC BY-SA 3.0</a>), via Wikimedia Commons.",
-    "footer.dev": "Sito realizzato da <a href=\"https://www.instagram.com/matichoc.pasion.por.el.cacao/\" target=\"_blank\" rel=\"noopener\">@matichoc.pasion.por.el.cacao</a> · Vuoi un sito così per la tua attività? <a href=\"https://ig.me/m/matichoc.pasion.por.el.cacao\" target=\"_blank\" rel=\"noopener\">Chiedi un preventivo</a>",
+    "footer.dev": "Sito realizzato da <a href=\"https://www.instagram.com/matichoc.pasion.por.el.cacao/\" target=\"_blank\" rel=\"noopener\">@matichoc.pasion.por.el.cacao</a> · Vuoi un sito così per la tua attività? <a href=\"https://wa.me/56942586908?text=Ciao%21%20Ho%20visto%20il%20sito%20di%20Roots%20Salinas%20e%20vorrei%20un%20preventivo%20per%20un%20sito%20per%20la%20mia%20attivit%C3%A0.\" target=\"_blank\" rel=\"noopener\">Chiedi un preventivo</a>",
     "fab": "Scrivici",
 
     "carta.opcion": "opzione",

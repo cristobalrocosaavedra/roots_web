@@ -149,7 +149,7 @@ window.ROOTS_I18N.en = {
     "footer.cotizar": "Get a group quote",
     "footer.llegar": "Getting here",
     "footer.creditos": "Photos of the family, the team, the restaurant, the guests and the churrasco salinero: Roots Salinas. The others are AI-generated reference images, except «Ola en Papudo» by <a href=\"https://commons.wikimedia.org/wiki/File:Laya_de_Papudo,_Oceano.jpg\" target=\"_blank\" rel=\"noopener\">Trinicorrea1</a> (<a href=\"https://creativecommons.org/licenses/by-sa/3.0/deed.en\" target=\"_blank\" rel=\"noopener\">CC BY-SA 3.0</a>), via Wikimedia Commons.",
-    "footer.dev": "Website by <a href=\"https://www.instagram.com/matichoc.pasion.por.el.cacao/\" target=\"_blank\" rel=\"noopener\">@matichoc.pasion.por.el.cacao</a> · Want a site like this for your business? <a href=\"https://ig.me/m/matichoc.pasion.por.el.cacao\" target=\"_blank\" rel=\"noopener\">Get a quote</a>",
+    "footer.dev": "Website by <a href=\"https://www.instagram.com/matichoc.pasion.por.el.cacao/\" target=\"_blank\" rel=\"noopener\">@matichoc.pasion.por.el.cacao</a> · Want a site like this for your business? <a href=\"https://wa.me/56942586908?text=Hi%21%20I%20saw%20the%20Roots%20Salinas%20website%20and%20I%27d%20like%20a%20quote%20for%20a%20website%20for%20my%20business.\" target=\"_blank\" rel=\"noopener\">Get a quote</a>",
     "fab": "Message us",
 
     "carta.opcion": "option",
