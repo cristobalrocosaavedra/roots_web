@@ -386,7 +386,7 @@ p { margin: 0 0 1em; }
 .contacto-wa a { color: var(--gold); }
 
 /* ---------- Footer ---------- */
-.footer { background: var(--night); padding: 64px 0 28px; border-top: 1px solid rgba(201, 165, 74, .25); }
+.footer { background: var(--night); padding: 64px 0 96px; border-top: 1px solid rgba(201, 165, 74, .25); }
 .footer__grid { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 28px; }
 .footer__brand { display: flex; align-items: center; gap: 20px; }
 .footer__brand img { border-radius: 50%; }
@@ -397,6 +397,9 @@ p { margin: 0 0 1em; }
 .footer__links a:hover { color: var(--gold); }
 .footer__credits { margin-top: 44px; padding-top: 20px; border-top: 1px solid rgba(201, 165, 74, .15); color: #8a8070; font-size: .78rem; }
 .footer__credits p { margin: 0 0 6px; }
+.footer__dev { margin-top: 12px !important; opacity: .85; }
+.footer__dev a { color: var(--gold-line); text-decoration: none; }
+.footer__dev a:hover { color: var(--gold); text-decoration: underline; }
 
 /* ---------- Botón flotante ---------- */
 .fab {

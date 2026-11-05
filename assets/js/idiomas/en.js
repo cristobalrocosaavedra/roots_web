@@ -149,6 +149,7 @@ window.ROOTS_I18N.en = {
     "footer.cotizar": "Get a group quote",
     "footer.llegar": "Getting here",
     "footer.creditos": "Photos of the family, the team, the restaurant, the guests and the churrasco salinero: Roots Salinas. The others are AI-generated reference images, except «Ola en Papudo» by <a href=\"https://commons.wikimedia.org/wiki/File:Laya_de_Papudo,_Oceano.jpg\" target=\"_blank\" rel=\"noopener\">Trinicorrea1</a> (<a href=\"https://creativecommons.org/licenses/by-sa/3.0/deed.en\" target=\"_blank\" rel=\"noopener\">CC BY-SA 3.0</a>), via Wikimedia Commons.",
+    "footer.dev": "Website by <a href=\"https://www.instagram.com/matichoc.pasion.po.el.cacao/\" target=\"_blank\" rel=\"noopener\">@matichoc.pasion.po.el.cacao</a> · Want a site like this for your business? <a href=\"https://ig.me/m/matichoc.pasion.po.el.cacao\" target=\"_blank\" rel=\"noopener\">Get a quote</a>",
     "fab": "Message us",
 
     "carta.opcion": "option",
