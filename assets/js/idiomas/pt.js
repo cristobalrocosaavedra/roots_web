@@ -149,7 +149,7 @@ window.ROOTS_I18N.pt = {
     "footer.cotizar": "Orçamento para grupos",
     "footer.llegar": "Como chegar",
     "footer.creditos": "Fotos da família, da equipe, do restaurante, dos clientes e do churrasco salinero: Roots Salinas. As demais são imagens ilustrativas geradas com IA, exceto «Ola en Papudo» de <a href=\"https://commons.wikimedia.org/wiki/File:Laya_de_Papudo,_Oceano.jpg\" target=\"_blank\" rel=\"noopener\">Trinicorrea1</a> (<a href=\"https://creativecommons.org/licenses/by-sa/3.0/deed.pt_BR\" target=\"_blank\" rel=\"noopener\">CC BY-SA 3.0</a>), via Wikimedia Commons.",
-    "footer.dev": "Site desenvolvido por <a href=\"https://www.instagram.com/matichoc.pasion.po.el.cacao/\" target=\"_blank\" rel=\"noopener\">@matichoc.pasion.po.el.cacao</a> · Quer um site assim para o seu negócio? <a href=\"https://ig.me/m/matichoc.pasion.po.el.cacao\" target=\"_blank\" rel=\"noopener\">Peça um orçamento</a>",
+    "footer.dev": "Site desenvolvido por <a href=\"https://www.instagram.com/matichoc.pasion.por.el.cacao/\" target=\"_blank\" rel=\"noopener\">@matichoc.pasion.por.el.cacao</a> · Quer um site assim para o seu negócio? <a href=\"https://ig.me/m/matichoc.pasion.por.el.cacao\" target=\"_blank\" rel=\"noopener\">Peça um orçamento</a>",
     "fab": "Fale conosco",
 
     "carta.opcion": "opção",
