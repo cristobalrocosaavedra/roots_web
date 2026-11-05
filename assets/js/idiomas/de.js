@@ -149,7 +149,7 @@ window.ROOTS_I18N.de = {
     "footer.cotizar": "Gruppenangebot anfragen",
     "footer.llegar": "Anfahrt",
     "footer.creditos": "Fotos der Familie, des Teams, des Lokals, der Gäste und des Churrasco salinero: Roots Salinas. Die übrigen sind mit KI erstellte Beispielbilder, außer „Ola en Papudo“ von <a href=\"https://commons.wikimedia.org/wiki/File:Laya_de_Papudo,_Oceano.jpg\" target=\"_blank\" rel=\"noopener\">Trinicorrea1</a> (<a href=\"https://creativecommons.org/licenses/by-sa/3.0/deed.de\" target=\"_blank\" rel=\"noopener\">CC BY-SA 3.0</a>), über Wikimedia Commons.",
-    "footer.dev": "Website von <a href=\"https://www.instagram.com/matichoc.pasion.po.el.cacao/\" target=\"_blank\" rel=\"noopener\">@matichoc.pasion.po.el.cacao</a> · Möchtest du so eine Website für dein Geschäft? <a href=\"https://ig.me/m/matichoc.pasion.po.el.cacao\" target=\"_blank\" rel=\"noopener\">Angebot anfragen</a>",
+    "footer.dev": "Website von <a href=\"https://www.instagram.com/matichoc.pasion.por.el.cacao/\" target=\"_blank\" rel=\"noopener\">@matichoc.pasion.por.el.cacao</a> · Möchtest du so eine Website für dein Geschäft? <a href=\"https://wa.me/56942586908?text=Hallo%21%20Ich%20habe%20die%20Website%20von%20Roots%20Salinas%20gesehen%20und%20m%C3%B6chte%20ein%20Angebot%20f%C3%BCr%20eine%20Website%20f%C3%BCr%20mein%20Gesch%C3%A4ft.\" target=\"_blank\" rel=\"noopener\">Angebot anfragen</a>",
     "fab": "Schreib uns",
 
     "carta.opcion": "Option",
